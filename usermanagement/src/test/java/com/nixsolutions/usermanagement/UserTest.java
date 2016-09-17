@@ -29,6 +29,6 @@ public class UserTest extends TestCase {
     
     public void testGetAge() {
         user.setDateOfBirth(dateOfBirthd);
-        assertEquals(2006 - 1984, user.getAge());
+        assertEquals(2016 - 1984, user.getAge());
     }
 }

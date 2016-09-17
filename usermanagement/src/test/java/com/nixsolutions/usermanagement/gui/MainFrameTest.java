@@ -219,7 +219,7 @@ public class MainFrameTest extends JFCTestCase {
 
             find(JPanel.class, "browsePanel");
             table = (JTable) find(JTable.class, "userTable");
-            assertEquals(1, table.getRowCount());
+            assertEquals(2, table.getRowCount());
             mockUserDao.verify();
             
         } catch (Exception e) {

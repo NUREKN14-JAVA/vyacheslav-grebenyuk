@@ -53,9 +53,17 @@ public class User {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.setTime(getDateOfBirth());
         int year = calendar.get(Calendar.YEAR);
-        return currentYear - year;
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int age = currentYear - year - 1;
+        if ( (currentMonth > month) || (currentMonth == month && currentDay >= day))
+            age++; // age = age + 1; age += 1; ++age;
+        return age;
     }
     public boolean equals(Object obj) {
         if (obj == null) {

@@ -125,5 +125,10 @@
   		<artifactId>jboss-j2ee</artifactId>
   		<version>4.2.2.GA</version>
   	</dependency>
+  	<dependency>
+  		<groupId>net.sf.ingenias</groupId>
+  		<artifactId>jade</artifactId>
+  		<version>4.3</version>
+  	</dependency>
   </dependencies>
 </project>

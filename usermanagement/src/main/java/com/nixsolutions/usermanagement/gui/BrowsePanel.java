@@ -1,7 +1,6 @@
 package com.nixsolutions.usermanagement.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import com.nixsolutions.usermanagement.db.DatabaseException;
 import com.nixsolutions.usermanagement.util.Messages;
 
 public class BrowsePanel extends JPanel implements ActionListener {
+    private static final long serialVersionUID = -4548910292462347062L;
 
     private MainFrame parent;
 
@@ -119,9 +119,9 @@ public class BrowsePanel extends JPanel implements ActionListener {
     public void initTable() {
         UserTableModel model;
         try {
-            model = new UserTableModel(parent.getDao().findAll());
+            model = new UserTableModel(parent.getUserDao().findAll());
         } catch (DatabaseException e) {
-            model = new UserTableModel(new ArrayList());
+            model = new UserTableModel(new ArrayList<>());
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);
 
@@ -153,7 +153,7 @@ public class BrowsePanel extends JPanel implements ActionListener {
                 return;
             }
             try {
-                parent.getDao().delete(
+                parent.getUserDao().delete(
                         ((UserTableModel) userTable.getModel())
                                 .getUser(selectedRow));
             } catch (DatabaseException e1) {

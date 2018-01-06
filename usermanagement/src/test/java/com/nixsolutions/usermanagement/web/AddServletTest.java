@@ -52,7 +52,6 @@ public class AddServletTest extends MockServletTestCase {
     }
 
     public void testAddEmptyDate() {
-        Date date = new Date();
         addRequestParameter("firstName", "John");
         addRequestParameter("lastName", "Doe");
         addRequestParameter("okButton", "Ok");
@@ -62,7 +61,6 @@ public class AddServletTest extends MockServletTestCase {
     }
 
     public void testAddEmptyDateIncorrect() {
-        Date date = new Date();
         addRequestParameter("firstName", "John");
         addRequestParameter("lastName", "Doe");
         addRequestParameter("date", "hsdfkjshdfk");

@@ -16,8 +16,8 @@ import com.nixsolutions.usermanagement.db.DatabaseException;
  * @author mak
  */
 public class BrowseServlet extends HttpServlet {
+    private static final long serialVersionUID = -3819044559705579782L;
 
-    
     /**
      * 
      */
@@ -66,7 +66,7 @@ public class BrowseServlet extends HttpServlet {
             return;
         }
         try {
-            User user = DaoFactory.getInstance().getUserDao().find(new Long(idStr));
+            User user = (User) DaoFactory.getInstance().getUserDao().find(new Long(idStr));
             req.getSession().setAttribute("user", user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class BrowseServlet extends HttpServlet {
      * @param resp
      */
     private void browse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Collection users;
+        Collection<User> users;
         try {
             users = DaoFactory.getInstance().getUserDao().findAll();
             req.getSession().setAttribute("users", users);

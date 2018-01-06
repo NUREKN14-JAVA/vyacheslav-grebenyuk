@@ -1,25 +1,23 @@
 package com.nixsolutions.usermanagement.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.nixsolutions.usermanagement.User;
 import com.nixsolutions.usermanagement.db.DaoFactory;
-import com.nixsolutions.usermanagement.db.UserDao;
+import com.nixsolutions.usermanagement.db.Dao;
 import com.nixsolutions.usermanagement.util.Messages;
 
 public class MainFrame extends JFrame {
-    
+    private static final long serialVersionUID = 4990500669153305864L;
+
     private static final int FRAME_HEIGHT = 600;
     private static final int FRAME_WIDTH = 800;
     private JPanel contentPanel;
     private JPanel browsePanel;
     private AddPanel addPanel;
-    private UserDao dao;
+    private Dao<User> dao;
     private EditPanel editPanel;
 
     public MainFrame() {
@@ -29,7 +27,7 @@ public class MainFrame extends JFrame {
     }
 
     
-    public UserDao getDao() {
+    public Dao<User> getUserDao() {
         return dao;
     }
 

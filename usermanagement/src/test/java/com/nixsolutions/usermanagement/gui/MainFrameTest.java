@@ -22,6 +22,7 @@ import com.nixsolutions.usermanagement.util.Messages;
 
 import junit.extensions.jfcunit.JFCTestCase;
 import junit.extensions.jfcunit.JFCTestHelper;
+import junit.extensions.jfcunit.TestHelper;
 import junit.extensions.jfcunit.eventdata.JTableMouseEventData;
 import junit.extensions.jfcunit.eventdata.MouseEventData;
 import junit.extensions.jfcunit.eventdata.StringEventData;
@@ -34,7 +35,7 @@ public class MainFrameTest extends JFCTestCase {
 
     private Mock mockUserDao;
 
-    private List users;
+    private List<User> users;
     
     protected void setUp() throws Exception {
         super.setUp();
@@ -62,7 +63,8 @@ public class MainFrameTest extends JFCTestCase {
         try {
             mockUserDao.verify();
             mainFrame.setVisible(false);
-            getHelper().cleanUp(this);
+            getHelper();
+            TestHelper.cleanUp(this);
             super.tearDown();
             
         } catch (Exception e) {
@@ -70,7 +72,7 @@ public class MainFrameTest extends JFCTestCase {
         }
     }
     
-    private Component find(Class componentClass, String name) {
+    private Component find(Class<?> componentClass, String name) {
         NamedComponentFinder finder;
         finder = new NamedComponentFinder(componentClass, name);
         finder.setWait(0);
@@ -108,7 +110,7 @@ public class MainFrameTest extends JFCTestCase {
             User expectedUser = new User(new Long(1), firstName, lastName, now);
             mockUserDao.expectAndReturn("create", user, expectedUser);
             
-            ArrayList users = new ArrayList(this.users);
+            ArrayList<User> users = new ArrayList<>(this.users);
             users.add(expectedUser);
             mockUserDao.expectAndReturn("findAll", users);
             
@@ -141,7 +143,7 @@ public class MainFrameTest extends JFCTestCase {
             String lastName = "Doe";
             Date now = new Date();
 
-            ArrayList users = new ArrayList(this.users);
+            ArrayList<User> users = new ArrayList<>(this.users);
             mockUserDao.expectAndReturn("findAll", users);
             
             JTable table = (JTable) find(JTable.class, "userTable");
@@ -174,7 +176,7 @@ public class MainFrameTest extends JFCTestCase {
             Date now = new Date();
 
             User expectedUser = new User(new Long(1), firstName, lastName, now);
-            List users = new ArrayList(this.users);
+            List<User> users = new ArrayList<>(this.users);
             users.add(expectedUser);
             
             mockUserDao.expectAndReturn("findAll", users);
@@ -233,7 +235,7 @@ public class MainFrameTest extends JFCTestCase {
             System.out.println(expectedUser);
             mockUserDao.expect("update", expectedUser);
 
-            List users = new ArrayList(this.users);
+            List<User> users = new ArrayList<>(this.users);
             mockUserDao.expectAndReturn("findAll", users);
             
             JTable table = (JTable) find(JTable.class, "userTable");
@@ -248,8 +250,6 @@ public class MainFrameTest extends JFCTestCase {
                     "firstNameField");
             JTextField lastNameField = (JTextField) find(JTextField.class,
                     "lastNameField");
-            JTextField dateOfBirthField = (JTextField) find(JTextField.class,
-                    "dateOfBirthField");
             
             getHelper().sendString(
                     new StringEventData(this, firstNameField, "1"));
@@ -274,7 +274,8 @@ public class MainFrameTest extends JFCTestCase {
         DialogFinder dFinder = new DialogFinder(title);
         dialog = (JDialog) dFinder.find();
         assertNotNull("Could not find dialog '" + title + "'", dialog);
-        getHelper().disposeWindow( dialog, this );
+        getHelper();
+        TestHelper.disposeWindow(dialog, this);
     }
 
     private void fillField(String firstName, String lastName, Date now) {
@@ -300,7 +301,7 @@ public class MainFrameTest extends JFCTestCase {
             User expectedUser = new User(new Long(1000), "George", "Bush", new Date());
             mockUserDao.expect("delete", expectedUser);
 
-            List users = new ArrayList();
+            List<User> users = new ArrayList<>();
             mockUserDao.expectAndReturn("findAll", users);
             
             JTable table = (JTable) find(JTable.class, "userTable");

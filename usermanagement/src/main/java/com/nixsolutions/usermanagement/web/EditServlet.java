@@ -17,7 +17,8 @@ import com.nixsolutions.usermanagement.db.DatabaseException;
  * @author mak
  */
 public class EditServlet extends HttpServlet {
-    
+    private static final long serialVersionUID = -4206951216857713178L;
+
     /**
      * 
      */

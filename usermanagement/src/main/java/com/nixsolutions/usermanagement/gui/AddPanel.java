@@ -2,7 +2,6 @@ package com.nixsolutions.usermanagement.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +20,8 @@ import com.nixsolutions.usermanagement.db.DatabaseException;
 import com.nixsolutions.usermanagement.util.Messages;
 
 public class AddPanel extends JPanel implements ActionListener {
-    
+    private static final long serialVersionUID = -1447962623166083695L;
+
     protected MainFrame parent;
     private JPanel buttonPanel;
     private JPanel fieldPanel;
@@ -132,7 +132,7 @@ public class AddPanel extends JPanel implements ActionListener {
                 return;
             }
             try {
-                parent.getDao().create(user );
+                parent.getUserDao().create(user);
             } catch (DatabaseException e1) {
                 JOptionPane.showMessageDialog(this, e1.getMessage(), "Error",
                         JOptionPane.ERROR_MESSAGE);

@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 import com.nixsolutions.usermanagement.User;
 
-class HsqldbUserDao implements UserDao {
+class HsqldbUserDao implements Dao<User> {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, firstname, lastname, dateofbirth FROM users";
 
@@ -140,8 +140,8 @@ class HsqldbUserDao implements UserDao {
         return result;
     }
 
-    public Collection findAll() throws DatabaseException {
-        Collection result = new LinkedList();
+    public Collection<User> findAll() throws DatabaseException {
+        Collection<User> result = new LinkedList<>();
 
         try {
             Connection connection = connectionFactory.createConnection();
@@ -167,9 +167,9 @@ class HsqldbUserDao implements UserDao {
     /**
      *  
      */
-    public Collection find(String firstName, String lastName)
+    public Collection<User> find(String firstName, String lastName)
             throws DatabaseException {
-        Collection result = new LinkedList();
+        Collection<User> result = new LinkedList<>();
 
         try {
             Connection connection = connectionFactory.createConnection();

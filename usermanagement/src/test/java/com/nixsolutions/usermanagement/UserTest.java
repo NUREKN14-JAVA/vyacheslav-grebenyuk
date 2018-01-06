@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 public class UserTest extends TestCase {
     
-    // Тест актуальный для текущей даты 7-Дек-2017
+    // Тест актуальный для текущей даты 11-Дек-2017
     private static final int CURRENT_YEAR = 2017;
     private static final int YEAR_OF_BIRTH = 1971;
     
@@ -24,10 +24,20 @@ public class UserTest extends TestCase {
     private static final int MONTH_OF_BIRTH_2 = Calendar.NOVEMBER;
     
     // Тест(3) для случая день рождения сегодя
+    private static final int ETALONE_AGE_3 = CURRENT_YEAR - YEAR_OF_BIRTH;
+    private static final int DAY_OF_BIRTH_3 = 11;
+    private static final int MONTH_OF_BIRTH_3 = Calendar.DECEMBER;
     
     // Тест(4) для случая месяц рождения идет, но день рождения еще впереди
+    private static final int ETALONE_AGE_4 = CURRENT_YEAR - YEAR_OF_BIRTH - 1;
+    private static final int DAY_OF_BIRTH_4 = 21;
+    private static final int MONTH_OF_BIRTH_4 = Calendar.DECEMBER;
     
     // Тест(5) для случая когда месяц рождения еще не начался
+    private static final int ETALONE_AGE_5 = CURRENT_YEAR - YEAR_OF_BIRTH - 1;
+    private static final int DAY_OF_BIRTH_5 = 11;
+    private static final int MONTH_OF_BIRTH_5 = Calendar.DECEMBER;
+
     
     private User user;
     private Date dateOfBirthd;
@@ -36,7 +46,6 @@ public class UserTest extends TestCase {
         super.setUp();
         user = new User();
     }
-
     
     public void testGetFullName() {
         user.setFirstName("John");

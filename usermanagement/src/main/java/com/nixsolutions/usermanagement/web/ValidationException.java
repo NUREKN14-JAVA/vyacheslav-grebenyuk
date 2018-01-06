@@ -4,6 +4,7 @@ package com.nixsolutions.usermanagement.web;
  * @author mak
  */
 public class ValidationException extends Exception {
+    private static final long serialVersionUID = -2167686536311212458L;
 
     /**
      * 

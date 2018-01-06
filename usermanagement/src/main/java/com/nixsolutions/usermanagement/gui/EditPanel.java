@@ -12,7 +12,8 @@ import com.nixsolutions.usermanagement.User;
 import com.nixsolutions.usermanagement.db.DatabaseException;
 
 public class EditPanel extends AddPanel {
-    
+    private static final long serialVersionUID = -3719802058751424289L;
+
     private User user;
 
     public EditPanel(MainFrame parent) {
@@ -35,7 +36,7 @@ public class EditPanel extends AddPanel {
                 throw e1;
             }
             try {
-                parent.getDao().update(user);
+                parent.getUserDao().update(user);
             } catch (DatabaseException e1) {
                 JOptionPane.showMessageDialog(this, e1.getMessage(), "Error",
                         JOptionPane.ERROR_MESSAGE);

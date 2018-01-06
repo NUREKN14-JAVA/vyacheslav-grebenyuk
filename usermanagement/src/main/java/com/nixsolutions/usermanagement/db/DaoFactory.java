@@ -3,6 +3,8 @@ package com.nixsolutions.usermanagement.db;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.nixsolutions.usermanagement.User;
+
 public abstract class DaoFactory {
 
     protected static final String USER_DAO = "dao.com.nixsolutions.usermanagement.db.UserDao";
@@ -23,7 +25,7 @@ public abstract class DaoFactory {
     
     public static synchronized DaoFactory getInstance() {
         if (instance == null) {
-            Class factoryClass;
+            Class<?> factoryClass;
             try {
                 factoryClass = Class.forName(properties
                         .getProperty(DAO_FACTORY));
@@ -47,5 +49,5 @@ public abstract class DaoFactory {
         return new ConnectionFactoryImpl(properties);
     }
     
-    public abstract UserDao getUserDao();
+    public abstract Dao<User> getUserDao();
 }

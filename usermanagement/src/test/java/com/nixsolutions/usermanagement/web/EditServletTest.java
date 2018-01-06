@@ -54,7 +54,6 @@ public class EditServletTest extends MockServletTestCase {
     }
 
     public void testEditEmptyDate() {
-        Date date = new Date();
         addRequestParameter("id", "1000");
         addRequestParameter("firstName", "John");
         addRequestParameter("lastName", "Doe");
@@ -65,7 +64,6 @@ public class EditServletTest extends MockServletTestCase {
     }
 
     public void testEditEmptyDateIncorrect() {
-        Date date = new Date();
         addRequestParameter("id", "1000");
         addRequestParameter("firstName", "John");
         addRequestParameter("lastName", "Doe");

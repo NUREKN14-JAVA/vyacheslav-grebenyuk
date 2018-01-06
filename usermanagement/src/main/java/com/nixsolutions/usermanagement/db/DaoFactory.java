@@ -7,8 +7,8 @@ import com.nixsolutions.usermanagement.User;
 
 public abstract class DaoFactory {
 
-    protected static final String USER_DAO = "dao.com.nixsolutions.usermanagement.db.UserDao";
-    private static final String DAO_FACTORY = "dao.factory";
+    protected static final String USER_DAO = "dao.UserDao";
+    private static final String DAO_FACTORY = "dao.Factory";
     protected static Properties properties;
     
     private static DaoFactory instance;

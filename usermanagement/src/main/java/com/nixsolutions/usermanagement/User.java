@@ -3,10 +3,25 @@ package com.nixsolutions.usermanagement;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name="users")
 public class User {
+    @Id @GeneratedValue
     private Long id;
+    @Column(name="firstname")
     private String firstName;
+    @Column(name="lastname")
     private String lastName;
+    @Column(name="dateofbirth")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     
     public User(String firstName, String lastName, Date date) {

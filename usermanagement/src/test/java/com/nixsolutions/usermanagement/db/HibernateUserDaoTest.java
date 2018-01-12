@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.nixsolutions.usermanagement.User;
 
 public class HibernateUserDaoTest extends DatabaseTestCase {
+    
     private HibernateUserDao dao;
     private Session currentSession;
 

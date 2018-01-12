@@ -106,5 +106,4 @@ public class HibernateUserDao implements Dao<User> {
     public SessionFactory getSessionFactory() {
         return HibernateUtils.getSessionFactory();
     }
-
 }

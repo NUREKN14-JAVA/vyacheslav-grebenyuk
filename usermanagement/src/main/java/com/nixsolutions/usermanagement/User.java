@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="users")
 public class User {
+    
     @Id @GeneratedValue
     private Long id;
     @Column(name="firstname")

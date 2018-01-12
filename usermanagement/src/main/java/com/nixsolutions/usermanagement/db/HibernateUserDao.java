@@ -28,20 +28,44 @@ public class HibernateUserDao implements Dao<User> {
 
     @Override
     public void update(User entity) throws DatabaseException {
-        // TODO Auto-generated method stub
-        
+        Session session = getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.update(entity);
+            t.commit();           
+        } catch (Exception e) {
+            t.rollback();
+            throw new DatabaseException(e);
+        }
     }
 
     @Override
     public void delete(User entity) throws DatabaseException {
-        // TODO Auto-generated method stub
-        
+        Session session = getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.delete(entity);
+            t.commit();           
+        } catch (Exception e) {
+            t.rollback();
+            throw new DatabaseException(e);
+        }                
     }
 
     @Override
     public User find(Long id) throws DatabaseException {
-        // TODO Auto-generated method stub
-        return null;
+        Session session = getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        User user = null;
+        try {
+            user = (User) session.createCriteria(User.class)
+                    .add(Restrictions.eq("id", id))
+                    .list().get(0);
+        } catch (Exception e) {
+            t.rollback();
+            throw new DatabaseException("Could not find the user with id=" + id);
+        }
+        return user;
     }
 
     @Override
@@ -65,8 +89,8 @@ public class HibernateUserDao implements Dao<User> {
         List<User> users = null;
         try {
             users = (List<User>) session.createCriteria(User.class)
-                    .add(Restrictions.eq("firstname", firstName))
-                    .add(Restrictions.eq("lastname", lastName))
+                    .add(Restrictions.eq("firstName", firstName))
+                    .add(Restrictions.eq("lastName", lastName))
                     .list();
         } catch (Exception e) {
             t.rollback();

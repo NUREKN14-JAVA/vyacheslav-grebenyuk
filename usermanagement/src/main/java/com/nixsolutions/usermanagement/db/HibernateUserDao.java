@@ -1,11 +1,10 @@
 package com.nixsolutions.usermanagement.db;
 
 import java.util.Collection;
-import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -18,69 +17,64 @@ import com.nixsolutions.usermanagement.User;
 @Scope("prototype")
 public class HibernateUserDao implements Dao<User> {
     @Autowired
-    private SessionFactory sessionFactory;
+    protected EntityManagerFactory myEmf;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public EntityManagerFactory getMyEmf() {
+        return myEmf;
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public void setMyEmf(EntityManagerFactory myEmf) {
+        this.myEmf = myEmf;
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public User create(User entity) throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        session.persist(entity);
+        myEmf.createEntityManager().persist(entity);
         return entity;
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public void update(User entity) throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        session.update(entity);
+        EntityManager em = myEmf.createEntityManager();
+        User user = em.find(User.class, entity.getId());
+        user.setFirstName(entity.getFirstName());
+        user.setLastName(entity.getLastName());
+        user.setDateOfBirth(entity.getDateOfBirth());
+        em.merge(user);
+        em.clear();
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public void delete(User entity) throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        session.delete(entity);
+        EntityManager em = myEmf.createEntityManager();
+        User user = em.find(User.class, entity.getId());
+        em.remove(user);
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public User find(Long id) throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        User user;
-        try {
-            user = (User) session.createCriteria(User.class).add(Restrictions.eq("id", id)).list().get(0);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DatabaseException("Could not find the user with id="
-                    + id);
-        }
+        User user = myEmf.createEntityManager().find(User.class, id);
+        if (user == null)
+            throw new DatabaseException("Could not find the user with id=" + id);
         return user;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public Collection<User> findAll() throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        List<User> users = (List<User>) session.createCriteria(User.class).list();
-        return users;
+        return myEmf.createEntityManager().createQuery( "from User" ).getResultList();
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public Collection<User> find(String firstName, String lastName) throws DatabaseException {
-        Session session = getSessionFactory().getCurrentSession();
-        List<User> users = (List<User>) session.createCriteria(User.class).add(Restrictions.eq("firstName", firstName))
-                    .add(Restrictions.eq("lastName", lastName)).list();
-        return users;
+        return myEmf.createEntityManager().createQuery( "from User WHERE firstName='" + firstName + "' AND lastName='" + lastName +"'").getResultList();
     }
 
     @Override

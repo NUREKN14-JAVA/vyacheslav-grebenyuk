@@ -43,10 +43,10 @@
 			<version>2.5.4</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+ 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.4</version>
+			<version>2.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jfcunit</groupId>
@@ -79,11 +79,13 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
@@ -98,10 +100,10 @@
 		<dependency>
 			<groupId>com.mockrunner</groupId>
 			<artifactId>mockrunner-servlet</artifactId>
-			<version>0.4.5</version>
+			<version>1.1.2</version>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency>
+		<dependency>
 			<groupId>jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<version>1.1</version>
@@ -121,12 +123,12 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.1</version>
 		</dependency>
- 		<dependency>
+		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
--->		<dependency>
+		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jboss-j2ee</artifactId>
 			<version>4.2.2.GA</version>

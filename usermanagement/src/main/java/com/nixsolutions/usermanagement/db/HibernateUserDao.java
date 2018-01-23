@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -42,8 +44,12 @@ public class HibernateUserDao implements Dao<User> {
         user.setFirstName(entity.getFirstName());
         user.setLastName(entity.getLastName());
         user.setDateOfBirth(entity.getDateOfBirth());
+        Session s = em.unwrap(Session.class);
+        Transaction t = s.getTransaction();
+        t.begin();
         em.merge(user);
-        em.clear();
+        t.commit();        
+        em.close();
     }
 
     @Override
@@ -51,7 +57,12 @@ public class HibernateUserDao implements Dao<User> {
     public void delete(User entity) throws DatabaseException {
         EntityManager em = myEmf.createEntityManager();
         User user = em.find(User.class, entity.getId());
+        Session s = em.unwrap(Session.class);
+        Transaction t = s.getTransaction();
+        t.begin();
         em.remove(user);
+        t.commit();
+        em.close();
     }
 
     @Override

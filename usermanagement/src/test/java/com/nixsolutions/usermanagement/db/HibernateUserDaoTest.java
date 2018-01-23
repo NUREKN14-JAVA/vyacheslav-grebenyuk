@@ -20,17 +20,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.AfterTransaction;
-import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nixsolutions.usermanagement.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:context.xml")
-public class HibernateUserDaoTest {
+@Transactional
+public class HibernateUserDaoTest extends AbstractTransactionalJUnit4SpringContextTests{
 
     @Autowired
     private Dao<User> hibernateUserDao;
@@ -132,6 +133,7 @@ public class HibernateUserDaoTest {
     }
 
     @Test
+    @Commit
     public void testUpdateUser() throws DatabaseException {
         User updUser = new User();
         updUser.setId(TEST_FIND_DELETE_ID);

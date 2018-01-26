@@ -29,5 +29,10 @@
         alert('${requestScope.error}');
     </script>
 </c:if>
+<c:if test="${requestScope.message != null}">
+    <script>
+        alert('${requestScope.message}');
+    </script>
+</c:if>
 </body>
 </html>

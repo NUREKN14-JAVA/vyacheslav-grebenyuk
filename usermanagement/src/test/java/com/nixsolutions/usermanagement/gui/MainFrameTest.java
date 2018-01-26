@@ -42,7 +42,7 @@ public class MainFrameTest extends JFCTestCase {
         
         try {
             Properties properties = new Properties();
-            properties.setProperty("dao.factory", MockDaoFactory.class
+            properties.setProperty("dao.Factory", MockDaoFactory.class
                     .getName());
             DaoFactory.init(properties );
             mockUserDao = ((MockDaoFactory) DaoFactory.getInstance())

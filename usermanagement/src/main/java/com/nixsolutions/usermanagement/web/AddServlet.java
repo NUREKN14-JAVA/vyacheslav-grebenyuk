@@ -19,12 +19,14 @@ public class AddServlet extends EditServlet {
     /**
      * 
      */
+    @Override
     protected void processUser(User user) throws DatabaseException {
         DaoFactory.getInstance().getUserDao().create(user);
     }
     /**
      * 
      */
+    @Override
     protected void showPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.getRequestDispatcher("/add.jsp").forward(req, resp);

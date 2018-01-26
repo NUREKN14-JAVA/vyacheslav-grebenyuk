@@ -2,6 +2,9 @@ package com.nixsolutions.usermanagement.web;
 
 import java.util.Properties;
 
+import org.junit.After;
+import org.junit.Before;
+
 import com.mockobjects.dynamic.Mock;
 import com.mockrunner.servlet.BasicServletTestCaseAdapter;
 import com.nixsolutions.usermanagement.db.DaoFactory;
@@ -17,10 +20,11 @@ public abstract class MockServletTestCase extends BasicServletTestCaseAdapter {
     /*
      * @see BasicServletTestCaseAdapter#setUp()
      */
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         super.setUp();
         Properties properties = new Properties();
-        properties.setProperty("dao.factory", MockDaoFactory.class.getName());
+        properties.setProperty("dao.Factory", MockDaoFactory.class.getName());
         DaoFactory.init(properties);
         setMockUserDao(((MockDaoFactory) DaoFactory.getInstance()).getMockUserDao());
     }
@@ -28,7 +32,8 @@ public abstract class MockServletTestCase extends BasicServletTestCaseAdapter {
     /*
      * @see BasicServletTestCaseAdapter#tearDown()
      */
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         getMockUserDao().verify();
         super.tearDown();
     }

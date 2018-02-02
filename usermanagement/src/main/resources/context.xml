@@ -11,7 +11,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-		<property name="url" value="jdbc:hsqldb:file:db/usermanagement" />
+		<property name="url" value="jdbc:hsqldb:file:I:/Java/gitNURE/usermanagement/db/usermanagement" />
 		<property name="username" value="SA" />
 		<property name="password" value="" />
 	</bean>
@@ -31,10 +31,10 @@
 		</property>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="myEmf" />
 	</bean>
+	<tx:annotation-driven />
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

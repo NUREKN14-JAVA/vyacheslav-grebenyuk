@@ -9,7 +9,7 @@
     </appender>
 
     <logger name="org.hibernate">
-        <level value="DEBUG"/>
+        <level value="INFO"/>
         <appender-ref ref="console"/>
     </logger>
     <logger name="com.nixsolutions">
